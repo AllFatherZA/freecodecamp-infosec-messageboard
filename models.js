@@ -5,8 +5,8 @@ const date = new Date();
 const ReplySchema = new Schema({
     text: { type: String },
     delete_password: { type: String },
-    created_on: { type: Date, default: date },
-    bumped_on: { type: Date, default: date },
+    created_on: { type: Date, default: Date.now },
+    bumped_on: { type: Date, default: Date.now },
     reported: { type: Boolean, default: false },
   });
 
@@ -16,12 +16,12 @@ const ThreadSchema = new Schema({
     reported: { type: Boolean, default: false },
     created_on: { type: Date, default: date },
     bumped_on: { type: Date, default: date },
-    replies: { type: [ReplySchema] },
+    replies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reply' }],
   });
 
   const Board_Schema = new Schema({
     name: {type: String},
-    threads: { type: [ThreadSchema]},
+    threads: [{ type: mongoose.Schema.Types.ObjectId, ref: "Thread" }],
   });
 
 const Thread = mongoose.model("Thread", ThreadSchema);

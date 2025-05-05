@@ -145,6 +145,7 @@ suite('Functional Tests', function () {
                 })
                 .end((err, res) => {
                     if (err) return done(err);
+                    console.log("REPLY POST RESPONSE:", res.body)
                     assert.equal(res.status, 200);
                     assert.isDefined(res.body._id);
                     assert.isArray(res.body.replies);
@@ -222,6 +223,7 @@ suite('Functional Tests', function () {
                 })
                 .end((err, res) => {
                     if (err) return done(err);
+                    console.log("reporting reply:",res.body)
                     assert.equal(res.status, 200);
                     assert.equal(res.text, "reported");
                     done();
